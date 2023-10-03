@@ -4,9 +4,9 @@ import numpy as np
 
 COLORS =[(0, 255, 255), (255, 255, 0), (255, 0, 0)]
 
-Class_names = []
+class_names = []
 with open("coco.names", "r") as f:
-    class_names = [cname.strip() for cname in f.readline()]
+    class_names = [cname.strip() for cname in f.readlines()]
 
 cap = cv2.VideoCapture("Video.mp4")
 
@@ -29,11 +29,11 @@ while True:
 
         color = COLORS[int(classid) % len(COLORS)]
 
-        label = f"{class_names[classid[0]]} : {score}"
+        label = f"{class_names[classid]} : {score}"
 
         cv2.rectangle(frame, box, color, 2)
 
-        cv2.putText(frame, label, (box[0], box[1], - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+        cv2.putText(frame, label, (box[0], box[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
     fps_label = f"FPS: {round((1.0/(end-start)), 2)}"
 
